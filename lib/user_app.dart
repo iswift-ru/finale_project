@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:finale_project/task.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:finale_project/themes/global_theme.dart';
@@ -142,6 +143,7 @@ class UserApp extends StatefulWidget {
 
 class _UserAppState extends State<UserApp> {
   late Future<User> futureUser;
+  late int userId;
 
   @override
   void initState() {
@@ -157,6 +159,7 @@ class _UserAppState extends State<UserApp> {
 
     if (arguments == null) arguments['idUser'] == 0;
     futureUser = fetchUser(arguments['idUser']);
+    userId = arguments['idUser'];
 
     return MaterialApp(
       theme: globalTheme(),
@@ -170,135 +173,153 @@ class _UserAppState extends State<UserApp> {
           future: futureUser,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return Container(
-                margin: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-                padding: EdgeInsets.all(20.0),
-                decoration: BoxDecoration(
-                  color: Color(0xffdddddd),
-                  borderRadius: BorderRadius.circular(5.0),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      "${snapshot.data!.name} (${snapshot.data!.username})",
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+              return ListView(
+                shrinkWrap: true,
+                children: [
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                    padding: EdgeInsets.all(20.0),
+                    decoration: BoxDecoration(
+                      color: Color(0xffdddddd),
+                      borderRadius: BorderRadius.circular(5.0),
                     ),
-                    SizedBox(height: 20),
-                    Text.rich(
-                        TextSpan(text: "Эл. почта:",
-                            style: const TextStyle(color: Colors.black, fontSize: 16),
-                            children: <TextSpan>[
-                              TextSpan(text: " ${snapshot.data!.email}", style: const TextStyle(fontWeight: FontWeight.bold)),
-                            ]
-                        )
-                    ),
-                    SizedBox(height: 5),
-                    Text.rich(
-                        TextSpan(text: "Телефон:",
-                            style: const TextStyle(color: Colors.black, fontSize: 16),
-                            children: <TextSpan>[
-                              TextSpan(text: " ${snapshot.data!.phone}", style: const TextStyle(fontWeight: FontWeight.bold)),
-                            ]
-                        )
-                    ),
-                    SizedBox(height: 5),
-                    Text.rich(
-                        TextSpan(text: "Сайт:",
-                            style: const TextStyle(color: Colors.black, fontSize: 16),
-                            children: <TextSpan>[
-                              TextSpan(text: " ${snapshot.data!.website}", style: const TextStyle(fontWeight: FontWeight.bold)),
-                            ]
-                        )
-                    ),
-                    SizedBox(height: 30,),
-                    const Text("Адрес",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold
-                    ),),
-                    SizedBox(height: 5,),
-                    Text.rich(TextSpan(
-                        text: "${snapshot.data!.address.zipcode}, ",
-                        style: const TextStyle(
-                            color: Colors.black, fontSize: 14),
-                        children: <TextSpan>[
-                          TextSpan(
-                            text: " ${snapshot.data!.address.city}",
-                            style: const TextStyle(),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          "${snapshot.data!.name} (${snapshot.data!.username})",
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
                           ),
-                          TextSpan(
-                            text:
-                                ", ${snapshot.data!.address.street}, ${snapshot.data!.address.suite}",
-                            style: const TextStyle(),
-                          ),
-                        ]
-                    ),),
-                    SizedBox(height: 5,),
-                    Text.rich(
-                        TextSpan(text: "Координаты:",
-                            style: const TextStyle(color: Colors.black, fontSize: 16),
-                            children: <TextSpan>[
-                              TextSpan(text: " ${snapshot.data!.address.geo.lat}, ${snapshot.data!.address.geo.lng}",
-                                  style: const TextStyle(fontWeight: FontWeight.bold)),
-                            ]
-                        )
-                    ),
-                    SizedBox(height: 30,),
-                    const Text(
-                      "Компания",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(height: 5,),
-                    Text.rich(
-                        TextSpan(text: "Название:",
-                            style: const TextStyle(color: Colors.black, fontSize: 16),
-                            children: <TextSpan>[
-                              TextSpan(text: " ${snapshot.data!.company.name}", style: const TextStyle(fontWeight: FontWeight.bold)),
-                            ]
-                        )
-                    ),
-                    SizedBox(height: 5,),
-                    Text.rich(
-                        TextSpan(text: "Слоган:",
-                            style: const TextStyle(color: Colors.black, fontSize: 16),
-                            children: <TextSpan>[
-                              TextSpan(text: " ${snapshot.data!.company.catchPhrase}", style: const TextStyle(fontWeight: FontWeight.bold)),
-                            ]
-                        )
-                    ),
-                    SizedBox(height: 5,),
-                    Text.rich(
-                        TextSpan(text: "BS:",
-                            style: const TextStyle(color: Colors.black, fontSize: 16),
-                            children: <TextSpan>[
-                              TextSpan(text: " ${snapshot.data!.company.bs}", style: const TextStyle(fontWeight: FontWeight.bold)),
-                            ]
                         ),
-                    ),
-                    SizedBox(height: 20,),
-                    ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => UsersApp()),
-                          );
-                          // Navigator.pushNamed(context, '/users',);
-                          // Navigator.push(context, MaterialPageRoute(builder: (context) => UsersApp(),),);
-                        },
-                      child: Text("Вернуться к списку"),
+                        SizedBox(height: 20),
+                        Text.rich(
+                            TextSpan(text: "Эл. почта:",
+                                style: const TextStyle(color: Colors.black, fontSize: 16),
+                                children: <TextSpan>[
+                                  TextSpan(text: " ${snapshot.data!.email}", style: const TextStyle(fontWeight: FontWeight.bold)),
+                                ]
+                            )
                         ),
-                  ],
-                ),
+                        SizedBox(height: 5),
+                        Text.rich(
+                            TextSpan(text: "Телефон:",
+                                style: const TextStyle(color: Colors.black, fontSize: 16),
+                                children: <TextSpan>[
+                                  TextSpan(text: " ${snapshot.data!.phone}", style: const TextStyle(fontWeight: FontWeight.bold)),
+                                ]
+                            )
+                        ),
+                        SizedBox(height: 5),
+                        Text.rich(
+                            TextSpan(text: "Сайт:",
+                                style: const TextStyle(color: Colors.black, fontSize: 16),
+                                children: <TextSpan>[
+                                  TextSpan(text: " ${snapshot.data!.website}", style: const TextStyle(fontWeight: FontWeight.bold)),
+                                ]
+                            )
+                        ),
+                        SizedBox(height: 30,),
+                        const Text("Адрес",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold
+                        ),),
+                        SizedBox(height: 5,),
+                        Text.rich(TextSpan(
+                            text: "${snapshot.data!.address.zipcode}, ",
+                            style: const TextStyle(
+                                color: Colors.black, fontSize: 14),
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: " ${snapshot.data!.address.city}",
+                                style: const TextStyle(),
+                              ),
+                              TextSpan(
+                                text:
+                                    ", ${snapshot.data!.address.street}, ${snapshot.data!.address.suite}",
+                                style: const TextStyle(),
+                              ),
+                            ]
+                        ),),
+                        SizedBox(height: 5,),
+                        Text.rich(
+                            TextSpan(text: "Координаты:",
+                                style: const TextStyle(color: Colors.black, fontSize: 16),
+                                children: <TextSpan>[
+                                  TextSpan(text: " ${snapshot.data!.address.geo.lat}, ${snapshot.data!.address.geo.lng}",
+                                      style: const TextStyle(fontWeight: FontWeight.bold)),
+                                ]
+                            )
+                        ),
+                        SizedBox(height: 30,),
+                        const Text(
+                          "Компания",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 5,),
+                        Text.rich(
+                            TextSpan(text: "Название:",
+                                style: const TextStyle(color: Colors.black, fontSize: 16),
+                                children: <TextSpan>[
+                                  TextSpan(text: " ${snapshot.data!.company.name}", style: const TextStyle(fontWeight: FontWeight.bold)),
+                                ]
+                            )
+                        ),
+                        SizedBox(height: 5,),
+                        Text.rich(
+                            TextSpan(text: "Слоган:",
+                                style: const TextStyle(color: Colors.black, fontSize: 16),
+                                children: <TextSpan>[
+                                  TextSpan(text: " ${snapshot.data!.company.catchPhrase}", style: const TextStyle(fontWeight: FontWeight.bold)),
+                                ]
+                            )
+                        ),
+                        SizedBox(height: 5,),
+                        Text.rich(
+                            TextSpan(text: "BS:",
+                                style: const TextStyle(color: Colors.black, fontSize: 16),
+                                children: <TextSpan>[
+                                  TextSpan(text: " ${snapshot.data!.company.bs}", style: const TextStyle(fontWeight: FontWeight.bold)),
+                                ]
+                            ),
+                        ),
+                        SizedBox(height: 20,),
+                        ElevatedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => UsersApp()),
+                              );
+                              // Navigator.pushNamed(context, '/users',);
+                              // Navigator.push(context, MaterialPageRoute(builder: (context) => UsersApp(),),);
+                            },
+                          child: Text("Вернуться к списку"),
+                            ),
+                        SizedBox(height: 20,),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    child: TaskApp(userId: userId),
+                  ),
+                  SizedBox(height: 20),
+                ],
               );
             } else if (snapshot.hasError) {
               return Text('${snapshot.error}');
             }
-            return const CircularProgressIndicator();
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: const [
+                Center(
+                  child: CircularProgressIndicator(),
+                ),
+              ],
+            );
           },
         ),
       ),

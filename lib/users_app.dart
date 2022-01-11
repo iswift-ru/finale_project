@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:finale_project/task.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:finale_project/themes/global_theme.dart';
@@ -213,7 +214,15 @@ class _UsersAppState extends State<UsersApp> {
             } else if (snapshot.hasError) {
               return Text('${snapshot.error}');
             }
-            return const CircularProgressIndicator();
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: const [
+                Center(
+                    child: CircularProgressIndicator(),
+                ),
+              ],
+            );
           },
         ),
       ),

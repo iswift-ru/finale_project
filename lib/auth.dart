@@ -13,6 +13,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: globalTheme(),
       home: Auth(),
       // initialRoute: '/',
@@ -129,7 +130,7 @@ class _AuthState extends State<Auth> {
                           },
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return 'Номер телефона, с когдом города';
+                              return 'Номер телефона, с кодом города';
                             }
                             return null;
                           },
