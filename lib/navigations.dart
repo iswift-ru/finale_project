@@ -28,6 +28,8 @@ class ApplicationBar {
       );
 }
 
+bool isShow = false;
+
 Widget navDrawer(context) => Drawer(
   child: ListView(
     padding: EdgeInsets.zero,
@@ -48,15 +50,22 @@ Widget navDrawer(context) => Drawer(
                         fit: BoxFit.fill),
                   ),
                 ),
-                Padding(
+                const Padding(
                   padding: EdgeInsets.only(bottom: 20),
                   child: Align(
                     alignment: Alignment.bottomCenter,
                     child: Text("Пользователи",
                       style: TextStyle(
-                        color: Theme.of(context).colorScheme.primary,
-                        fontSize: 20,
+                        color: Colors.white,
+                        fontSize: 30,
                         fontWeight: FontWeight.bold,
+                        shadows: <Shadow>[
+                          Shadow(
+                            offset: Offset(1.0, 1.0),
+                            blurRadius: 3.0,
+                            color: Color.fromARGB(255, 0, 0, 0),
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -64,7 +73,7 @@ Widget navDrawer(context) => Drawer(
               ],
             ),
           )),
-      ListTile(
+      !isShow ? ListTile(
         leading: const Icon(Icons.input_rounded),
         title: const Text("Войти"),
         onTap: () {
@@ -73,10 +82,20 @@ Widget navDrawer(context) => Drawer(
             MaterialPageRoute(builder: (context) => Auth()),
           );
 
-          // Navigator.pushNamed(context, '/');
+        },
+      ) : ListTile(
+        leading: const Icon(Icons.input_rounded),
+        title: const Text("Выйти", style: TextStyle(color: Colors.red),),
+        onTap: () {
+          isShow = false;
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Auth()),
+          );
+
         },
       ),
-      ListTile(
+      isShow ? ListTile(
         leading: const Icon(Icons.format_list_numbered_sharp),
         title: const Text("Список пользователей",),
         onTap: () {
@@ -84,9 +103,9 @@ Widget navDrawer(context) => Drawer(
             context,
             MaterialPageRoute(builder: (context) => UsersApp()),
           );
-          // Navigator.pushNamed(context, '/users');
+
         },
-      ),
+      ): Container(),
       // ListTile(
       //   leading: const Icon(Icons.format_list_numbered_sharp),
       //   title: const Text("Пользователь",),
