@@ -298,8 +298,17 @@ class _UserAppState extends State<UserApp> {
                             },
                           child: Text("Вернуться к списку"),
                             ),
-                        SizedBox(height: 20,),
                       ],
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(top: 10, bottom: 10),
+                    margin: EdgeInsets.only(top: 5, bottom: 20),
+                    color: Theme.of(context).colorScheme.secondaryVariant,
+                    child: Text("Список дел",
+                      style: Theme.of(context).textTheme.headline4,
+                      textAlign: TextAlign.center,
+
                     ),
                   ),
                   Container(
