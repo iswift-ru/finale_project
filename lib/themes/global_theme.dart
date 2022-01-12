@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
 
 class ThemeSettings {
+  static final ThemeSettings _instance = ThemeSettings._internal();
   bool themeBrightness = false;
+
+  factory ThemeSettings()
+  {
+    return _instance;
+  }
+
+  ThemeSettings._internal();
 }
 
+
 ThemeSettings themeSett = ThemeSettings();
+
 
 ThemeData globalTheme() {
   if (themeSett.themeBrightness == false) {

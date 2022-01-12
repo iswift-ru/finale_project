@@ -7,11 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:finale_project/themes/global_theme.dart';
 
 import 'package:finale_project/navigations.dart';
-import 'package:finale_project/auth.dart';
 import 'package:finale_project/users_app.dart';
-import 'package:finale_project/user_app.dart';
-import 'package:finale_project/settings.dart';
-
 
 
 Future<User> fetchUser(int idUser) async {

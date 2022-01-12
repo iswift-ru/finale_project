@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:finale_project/themes/global_theme.dart';
 
-import 'package:finale_project/navigations.dart';
 import 'package:finale_project/auth.dart';
 import 'package:finale_project/users_app.dart';
-import 'package:finale_project/user_app.dart';
 import 'package:finale_project/settings.dart';
-
-
-final _messengerKey = GlobalKey<ScaffoldMessengerState>();
 
 
 class ApplicationBar {
@@ -39,8 +33,6 @@ Widget navDrawer(context) => Drawer(
           decoration: const BoxDecoration(color: Colors.white),
           child: Container(
             child: Stack(
-              // mainAxisAlignment: MainAxisAlignment.center,
-              // crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
                   decoration: const BoxDecoration(
@@ -106,13 +98,6 @@ Widget navDrawer(context) => Drawer(
 
         },
       ): Container(),
-      // ListTile(
-      //   leading: const Icon(Icons.format_list_numbered_sharp),
-      //   title: const Text("Пользователь",),
-      //   onTap: () {
-      //     Navigator.pushNamed(context, '/user');
-      //   },
-      // ),
       const Divider(),
       const Padding(
         padding: EdgeInsets.only(right: 20.0),

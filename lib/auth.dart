@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:finale_project/themes/global_theme.dart';
 
 import 'package:finale_project/navigations.dart';
-import 'package:finale_project/auth.dart';
 import 'package:finale_project/users_app.dart';
-import 'package:finale_project/user_app.dart';
-import 'package:finale_project/settings.dart';
+
 
 class MainApp extends StatelessWidget {
   const MainApp({Key? key}) : super(key: key);
@@ -92,7 +90,6 @@ class _AuthState extends State<Auth> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  // const SizedBox(width: 110, height: 84, child: Image(image: AssetImage('assets/dart-logo.png'),),),
                   const SizedBox(
                     height: 200,
                   ),

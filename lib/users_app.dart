@@ -1,17 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:finale_project/task.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:finale_project/themes/global_theme.dart';
 
 import 'package:finale_project/navigations.dart';
-import 'package:finale_project/auth.dart';
-import 'package:finale_project/users_app.dart';
 import 'package:finale_project/user_app.dart';
-import 'package:finale_project/settings.dart';
-
 
 
 Future<List> fetchUser() async {
@@ -134,7 +129,6 @@ class Company {
     );
   }
 }
-
 
 
 class UsersApp extends StatefulWidget {

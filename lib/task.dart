@@ -3,9 +3,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:finale_project/themes/global_theme.dart';
 
-import 'package:finale_project/user_app.dart';
 
 Future<List> fetchTask(int idUser) async {
   final response = await http
@@ -122,8 +120,6 @@ class _TaskAppState extends State<TaskApp> {
                 ],
               );
             },
-
         );
-
   }
 }
