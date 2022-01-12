@@ -158,7 +158,7 @@ class _UsersAppState extends State<UsersApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: globalTheme(),
+      theme: globalTheme(false),
       routes: {
         '/user': (BuildContext context) =>  const UserApp(),
       },

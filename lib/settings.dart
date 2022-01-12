@@ -24,7 +24,7 @@ class _SettingsState extends State<Settings> {
     TextButton.styleFrom(primary: Theme.of(context).colorScheme.onPrimary);
 
     return MaterialApp(
-      theme: globalTheme(),
+      theme: globalTheme(_isSelected),
       home: Scaffold(
           appBar: appBar.appBar(context),
           drawer: navDrawer(context),
@@ -54,6 +54,7 @@ class _SettingsState extends State<Settings> {
                   onChanged: (bool newValue) {
                     setState(() {
                       _isSelected = !_isSelected;
+                      globalTheme(_isSelected);
                     });
                   },
                   title: Text('Тёмная тема'),

@@ -14,7 +14,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: globalTheme(),
+      theme: globalTheme(false),
       home: Auth(),
       // initialRoute: '/',
       // routes: {
@@ -74,7 +74,7 @@ class _AuthState extends State<Auth> {
     var appBar = ApplicationBar();
 
     return MaterialApp(
-      theme: globalTheme(),
+      theme: globalTheme(false),
       home: Scaffold(
           appBar: appBar.appBar(context),
           drawer: navDrawer(context),
