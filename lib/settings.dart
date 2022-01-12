@@ -21,10 +21,10 @@ class _SettingsState extends State<Settings> {
   Widget build(BuildContext context) {
 
     final ButtonStyle buttonStyle =
-    TextButton.styleFrom(primary: Theme.of(context).colorScheme.onPrimary);
+      TextButton.styleFrom(primary: Theme.of(context).colorScheme.onPrimary);
 
     return MaterialApp(
-      theme: globalTheme(_isSelected),
+      theme: globalTheme(),
       home: Scaffold(
           appBar: appBar.appBar(context),
           drawer: navDrawer(context),
@@ -50,11 +50,11 @@ class _SettingsState extends State<Settings> {
                       .headline2,),
                 SizedBox(height: 60,),
                 SwitchListTile(
-                  value: _isSelected,
+                  value: themeSett.themeBrightness,
                   onChanged: (bool newValue) {
                     setState(() {
-                      _isSelected = !_isSelected;
-                      globalTheme(_isSelected);
+                      themeSett.themeBrightness = !themeSett.themeBrightness;
+                      globalTheme();
                     });
                   },
                   title: Text('Тёмная тема'),

@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 
-ThemeData globalTheme(bool switcher) {
-  if (switcher == false) {
+class ThemeSettings {
+  bool themeBrightness = false;
+}
+
+ThemeSettings themeSett = ThemeSettings();
+
+ThemeData globalTheme() {
+  if (themeSett.themeBrightness == false) {
     return ThemeData(
       fontFamily: "Georgia",
       splashColor: Colors.tealAccent,

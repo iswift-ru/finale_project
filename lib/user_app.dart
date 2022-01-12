@@ -162,7 +162,7 @@ class _UserAppState extends State<UserApp> {
     userId = arguments['idUser'];
 
     return MaterialApp(
-      theme: globalTheme(false),
+      theme: globalTheme(),
       routes: {
         '/user': (BuildContext context) =>  const UserApp(),
       },
