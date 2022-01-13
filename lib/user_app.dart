@@ -4,9 +4,8 @@ import 'dart:convert';
 import 'package:finale_project/task.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:finale_project/themes/global_theme.dart';
 
-import 'package:finale_project/navigations.dart';
+import 'package:finale_project/navigation.dart';
 import 'package:finale_project/users_app.dart';
 
 
@@ -157,12 +156,7 @@ class _UserAppState extends State<UserApp> {
     futureUser = fetchUser(arguments['idUser']);
     userId = arguments['idUser'];
 
-    return MaterialApp(
-      theme: globalTheme(),
-      routes: {
-        '/user': (BuildContext context) =>  const UserApp(),
-      },
-      home: Scaffold(
+    return Scaffold(
         appBar: appBar.appBar(context),
         drawer: navDrawer(context),
         body: FutureBuilder<User>(
@@ -327,7 +321,6 @@ class _UserAppState extends State<UserApp> {
             );
           },
         ),
-      ),
-    );
+      );
   }
 }

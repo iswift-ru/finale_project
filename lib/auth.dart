@@ -1,26 +1,40 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:finale_project/themes/global_theme.dart';
 
-import 'package:finale_project/navigations.dart';
+import 'package:finale_project/navigation.dart';
+import 'package:finale_project/settings.dart';
 import 'package:finale_project/users_app.dart';
+import 'package:finale_project/user_app.dart';
 
+
+StreamController<bool> isLightTheme = StreamController();
 
 class MainApp extends StatelessWidget {
   const MainApp({Key? key}) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: globalTheme(),
-      home: Auth(),
-      // initialRoute: '/',
-      // routes: {
-      //   '/': (BuildContext context) => const Auth(),
-      //   '/user': (BuildContext context) =>  const UserApp(),
-      //   '/users': (BuildContext context) => const UsersApp(),
-      //   '/settings': (BuildContext context) => const Settings(),
-      // },
+    return StreamBuilder<bool>(
+      initialData: true,
+      stream: isLightTheme.stream,
+      builder: (context, snapshot) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: globalTheme(snapshot.data!),
+          // theme: snapshot.data! ? ThemeData.light() : ThemeData.dark(),
+          // home: Auth(),
+          initialRoute: '/',
+          routes: {
+            '/': (BuildContext context) => const Auth(),
+            '/user': (BuildContext context) =>  const UserApp(),
+            '/users': (BuildContext context) => const UsersApp(),
+            '/settings': (BuildContext context) => const Settings(),
+          },
+        );
+      }
     );
   }
 }
@@ -71,9 +85,7 @@ class _AuthState extends State<Auth> {
 
     var appBar = ApplicationBar();
 
-    return MaterialApp(
-      theme: globalTheme(),
-      home: Scaffold(
+    return Scaffold(
           appBar: appBar.appBar(context),
           drawer: navDrawer(context),
           body: Container(
@@ -188,10 +200,11 @@ class _AuthState extends State<Auth> {
                                           ));
                                 } else {
                                   isShow = true;
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => UsersApp()),
-                                  );
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(builder: (context) => UsersApp()),
+                                  // );
+                                  Navigator.pushReplacementNamed(context, '/users');
                                 }
                               },
                               child: const Text('Войти'),
@@ -240,7 +253,6 @@ class _AuthState extends State<Auth> {
                 ],
               ),
             ),
-          )),
-    );
+          ));
   }
 }

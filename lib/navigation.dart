@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:finale_project/auth.dart';
-import 'package:finale_project/users_app.dart';
-import 'package:finale_project/settings.dart';
-
 
 class ApplicationBar {
   PreferredSizeWidget appBar(context) => AppBar(
@@ -11,11 +7,11 @@ class ApplicationBar {
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Settings()),
-                );
-                // Navigator.pushNamed(context, '/settings');
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => Settings()),
+                // );
+                Navigator.pushReplacementNamed(context, '/settings');
               },
               icon: Icon(Icons.settings)),
         ],
@@ -69,33 +65,33 @@ Widget navDrawer(context) => Drawer(
         leading: const Icon(Icons.input_rounded),
         title: const Text("Войти"),
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Auth()),
-          );
-
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(builder: (context) => Auth()),
+          // );
+          Navigator.pushReplacementNamed(context, '/');
         },
       ) : ListTile(
         leading: const Icon(Icons.input_rounded),
         title: const Text("Выйти", style: TextStyle(color: Colors.red),),
         onTap: () {
           isShow = false;
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Auth()),
-          );
-
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(builder: (context) => Auth()),
+          // );
+          Navigator.pushReplacementNamed(context, '/');
         },
       ),
       isShow ? ListTile(
         leading: const Icon(Icons.format_list_numbered_sharp),
         title: const Text("Список пользователей",),
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => UsersApp()),
-          );
-
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(builder: (context) => UsersApp()),
+          // );
+          Navigator.pushReplacementNamed(context, '/users');
         },
       ): Container(),
       const Divider(),
@@ -113,11 +109,11 @@ Widget navDrawer(context) => Drawer(
         leading: const Icon(Icons.settings),
         title: const Text("Настройки"),
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Settings()),
-          );
-          // Navigator.pushNamed(context, '/settings');
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(builder: (context) => Settings()),
+          // );
+          Navigator.pushNamed(context, '/settings');
         },
       ),
     ],

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:finale_project/navigations.dart';
+import 'package:finale_project/navigation.dart';
 import 'package:finale_project/themes/global_theme.dart';
+
+import 'auth.dart';
 
 class Settings extends StatefulWidget {
   const Settings({Key? key}) : super(key: key);
@@ -16,12 +18,7 @@ class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
 
-    final ButtonStyle buttonStyle =
-      TextButton.styleFrom(primary: Theme.of(context).colorScheme.onPrimary);
-
-    return MaterialApp(
-      theme: globalTheme(),
-      home: Scaffold(
+    return Scaffold(
           appBar: appBar.appBar(context),
           drawer: navDrawer(context),
           body: Container(
@@ -35,31 +32,30 @@ class _SettingsState extends State<Settings> {
             ),
             width: double.infinity,
             height: double.infinity,
-            padding: EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: SingleChildScrollView(
               child: Column(children: [
-                SizedBox(height: 200,),
+                const SizedBox(height: 200,),
                 Text("Настройки",
                   style: Theme
                       .of(context)
                       .textTheme
                       .headline2,),
-                SizedBox(height: 60,),
+                const SizedBox(height: 60,),
                 SwitchListTile(
                   value: themeSett.themeBrightness,
                   onChanged: (bool newValue) {
                     setState(() {
                       themeSett.themeBrightness = !themeSett.themeBrightness;
-                      globalTheme();
+                      isLightTheme.add(!newValue);
                     });
                   },
-                  title: Text('Тёмная тема'),
+                  title: const Text('Тёмная тема'),
                 ),
-                SizedBox(height: 60,),
+                const SizedBox(height: 60,),
               ],
               ),
             ),
-          )),
-    );
+          ));
   }
 }

@@ -16,8 +16,8 @@ class ThemeSettings {
 ThemeSettings themeSett = ThemeSettings();
 
 
-ThemeData globalTheme() {
-  if (themeSett.themeBrightness == false) {
+ThemeData globalTheme(bool settTheme) {
+  if (settTheme == true) {
     return ThemeData(
       fontFamily: "Georgia",
       splashColor: Colors.tealAccent,
