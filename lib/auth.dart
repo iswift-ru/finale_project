@@ -61,7 +61,6 @@ class _AuthState extends State<Auth> {
 
       if (authData.phone == "9991234567" && authData.pass == "qwerty")
         {
-          print("${authData.phone} ${authData.pass} ");
           return true;
         }
       else
@@ -135,13 +134,18 @@ class _AuthState extends State<Auth> {
                                 color: Color(0xFF760D03),
                               )),
                           onSaved: (value) {
-                            authData.phone = value!.toString();
+                            if (value != null) {
+                              authData.phone = value.toString();
+                            } else {
+                              authData.phone = "";
+                            }
                           },
+                          initialValue: "",
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'Номер телефона, с кодом города';
                             }
-                            return null;
+                            // return null;
                           },
                         ),
                         const SizedBox(
@@ -164,13 +168,18 @@ class _AuthState extends State<Auth> {
                                 color: Color(0xFF760D03),
                               )),
                           onSaved: (value) {
-                            authData.pass = value!.toString();
+                            if (value != null) {
+                              authData.pass = value.toString();
+                            } else {
+                              authData.pass = "";
+                            }
                           },
+                          initialValue: "",
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'Пароль от 4 символов';
                             }
-                            return null;
+                            // return null;
                           },
                         ),
                         const SizedBox(
@@ -181,7 +190,7 @@ class _AuthState extends State<Auth> {
                             height: 42,
                             child: ElevatedButton(
                               onPressed: () {
-                                if (!checkAuth()) {
+                                if (checkAuth() == null || !checkAuth()) {
                                   showDialog(
                                       context: context,
                                       builder: (BuildContext context) =>
