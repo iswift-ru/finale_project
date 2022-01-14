@@ -128,11 +128,10 @@ class _AuthState extends State<Auth> {
                               focusedBorder: borderStyle,
                               errorBorder: borderStyle,
                               focusedErrorBorder: borderStyle,
-                              labelText: '9991234567',
-                              labelStyle: TextStyle(),
-                              errorStyle: TextStyle(
-                                color: Color(0xFF760D03),
-                              )),
+                              labelText: 'Телефон',
+                              labelStyle: TextStyle(color: Colors.teal),
+                              errorStyle: TextStyle(color: Color(0xFF760D03),)
+                          ),
                           onSaved: (value) {
                             if (value != null) {
                               authData.phone = value.toString();
@@ -163,10 +162,9 @@ class _AuthState extends State<Auth> {
                               errorBorder: borderStyle,
                               focusedErrorBorder: borderStyle,
                               labelText: 'Пароль',
-                              labelStyle: TextStyle(),
-                              errorStyle: TextStyle(
-                                color: Color(0xFF760D03),
-                              )),
+                              labelStyle: TextStyle(color: Colors.teal),
+                              errorStyle: TextStyle(color: Color(0xFF760D03),)
+                          ),
                           onSaved: (value) {
                             if (value != null) {
                               authData.pass = value.toString();
